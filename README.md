@@ -1,1 +1,1 @@
-# chrome-tab
+# chrome-tab-switch

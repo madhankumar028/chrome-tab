@@ -1,0 +1,12 @@
+{
+  "manifest_version": 1,
+  "name": "Chrome-tab-switch",
+  "description": "Used to navigate opened tabs like your favourite editor",
+  "version": "1.0",
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs"
+  ]
+}
