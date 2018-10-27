@@ -1,9 +1,11 @@
 {
-  "manifest_version": 1,
-  "name": "Chrome-tab-switch",
-  "description": "Used to navigate opened tabs like your favourite editor",
+  "manifest_version": 2,
+  "name": "Browser-tab",
+  "description": "Used to navigate to opened tabs in your browser like your favourite editor",
   "version": "1.0",
+  "author": "Madhankumar <madhankumar028@gmail.com>",
   "browser_action": {
+    "default_title": "Tabs",
     "default_popup": "index.html"
   },
   "permissions": [
