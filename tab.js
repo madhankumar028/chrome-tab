@@ -12,6 +12,9 @@
 
     // all the app level constants are configured inside the configure object
     const CONFIG = {
+        
+        DEFAULT_FAVICON: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAMklEQVR4AWMgEkT9R4INWBUgKX0Q1YBXQYQCkhKEMDILogSnAhhEV4AGRqoCTEhkPAMAbO9DU+cdCDkAAAAASUVORK5CYII=',
+
         SHORTCUT_KEY: '⌘+⇧+k, ⌃+⇧+k',
 
         BASIC_SWITCH_TAB_MARKUP : `
@@ -65,7 +68,7 @@
                 let icon = document.createElement('img');
                 let favIconWrapper = document.createElement('span');
 
-                icon.setAttribute('src', tab.favIconUrl);
+                icon.setAttribute('src', tab.favIconUrl ? tab.favIconUrl : CONFIG.DEFAULT_FAVICON);
                 icon.setAttribute('class', 'fav-icon');
                 title.setAttribute('class', 'tab-title');
 
