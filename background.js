@@ -7,6 +7,10 @@
         chrome.tabs.executeScript(tab.id, { file: "tab.js" });
     });
 
+    /**
+     * Listener for communicating to the scripts
+     * inside the webpage
+     */
     chrome.runtime.onMessage.addListener(function(request, sender, senderResponse) {
         let chromeExtensionMessageHandler = {
             /**

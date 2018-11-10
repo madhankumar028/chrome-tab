@@ -9,6 +9,8 @@
     position: fixed;
     top: 10vw;
     right: 25vw;
+    z-index: 99;
+    background-color: #fff;
     width: 600px;
     border: 1px solid rgb(229, 229, 229);
     padding: 10px;
@@ -31,8 +33,10 @@
     margin-left: 10px;
 }
 
-#tab-list {
+.tab-list {
     margin: 10px 0;
+    height: 500px;
+    overflow: auto;
 }
 
 li {

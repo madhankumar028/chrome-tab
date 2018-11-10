@@ -20,7 +20,7 @@
         BASIC_SWITCH_TAB_MARKUP : `
             <div class="chrome-tab" id="tabber">
                 <input type="search" class="search-box">
-                <ul id="tab-list"></ul>
+                <ul id="tabs" class="tab-list"></ul>
             </div>
         `,
 
@@ -34,19 +34,20 @@
         `,
     };
 
+    
     const chromeTabModule = {
         
-        allOpenedTabs: [],
-        
+        allOpenedTabs = [],
+
         switchTab: (tabId) => {},
         
         getAllTabs: (callback) => {
-            // chrome.tabs.query({}, tabs => {
-            //     callback(tabs);
-            // });
             chrome.extension.sendMessage({type: 'getAllTabs'}, function(tabs) {
-                console.log(tabs);
-                callback(tabs);
+                if (!chromeTabModule.allOpenedTabs.length) {
+                    chromeTabModule.allOpenedTabs = tabs;
+                    callback(chromeTabModule.allOpenedTabs);
+                }
+                return false;
             });
         },
         
@@ -64,7 +65,7 @@
             element.innerHTML = CONFIG.BASIC_SWITCH_TAB_MARKUP;
             document.body.appendChild(element);
 
-            tabList = document.getElementById('tab-list');
+            tabList = document.getElementById('tabs');
             
             tabs.forEach((tab, index) => {
                 let list = document.createElement('li');
