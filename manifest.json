@@ -5,10 +5,11 @@
   "version": "1.0",
   "author": "Madhankumar <madhankumar028@gmail.com>",
   "browser_action": {
-    "default_title": "Tabs",
-    "default_popup": "index.html"
+    "default_title": "Tabs"
   },
-  "permissions": [
-    "tabs"
-  ]
+  "permissions": ["tabs", "http://*/*", "https://*/*","activeTab"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  }
 }

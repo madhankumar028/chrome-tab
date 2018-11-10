@@ -6,6 +6,9 @@
 }
 
 .chrome-tab {
+    position: fixed;
+    top: 10vw;
+    right: 25vw;
     width: 600px;
     border: 1px solid rgb(229, 229, 229);
     padding: 10px;

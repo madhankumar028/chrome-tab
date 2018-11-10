@@ -41,7 +41,11 @@
         switchTab: (tabId) => {},
         
         getAllTabs: (callback) => {
-            chrome.tabs.query({}, tabs => {
+            // chrome.tabs.query({}, tabs => {
+            //     callback(tabs);
+            // });
+            chrome.extension.sendMessage({type: 'getAllTabs'}, function(tabs) {
+                console.log(tabs);
                 callback(tabs);
             });
         },
