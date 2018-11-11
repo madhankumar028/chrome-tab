@@ -1,20 +1,25 @@
+/**
+ * Background script
+ * 
+ * It has both the listeners, one will request content scripts and
+ * another will respond to content scripts
+ * 
+ * @author: Madhankumar<madhankumar028@gmail.com>
+ */
+
 (function() {
 
     'use strict';
 
-    chrome.browserAction.onClicked.addListener(function (tab) {
-        chrome.tabs.insertCSS(tab.id, { file: "tab.css" });
-        chrome.tabs.executeScript(tab.id, { file: "tab.js" });
-    });
-
     /**
-     * Listener for communicating to the scripts
-     * inside the webpage
+     * Listener for content scripts
+     *
      */
     chrome.runtime.onMessage.addListener(function(request, sender, senderResponse) {
         let chromeExtensionMessageHandler = {
             /**
              * returns all the opened tabs in the chrome
+             * by excluding the currently opened tab
              */
             getAllTabs: function(sender) {
                 chrome.tabs.query({}, tabs => {
@@ -30,6 +35,17 @@
         }
 
         return chromeExtensionMessageHandler[request.type](sender);
+    });
+
+    /**
+     * Responder for background scripts
+     */
+    chrome.commands.onCommand.addListener(function(command) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, command, function(response) {
+                console.info(response);
+            });
+        })
     });
 
 })();

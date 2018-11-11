@@ -4,7 +4,7 @@
  * Open source browser extension
  * Naviagte to opened tabs like your favourite editor or IDE
  * 
- * @author: Madhankumar <madhankumar028@gmail.com>
+ * @author: Madhankumar<madhankumar028@gmail.com>
  */
 (function() {
 
@@ -14,8 +14,6 @@
     const CONFIG = {
         
         DEFAULT_FAVICON: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAMklEQVR4AWMgEkT9R4INWBUgKX0Q1YBXQYQCkhKEMDILogSnAhhEV4AGRqoCTEhkPAMAbO9DU+cdCDkAAAAASUVORK5CYII=',
-
-        SHORTCUT_KEY: '⌘+⇧+k, ⌃+⇧+k',
 
         BASIC_SWITCH_TAB_MARKUP : `
             <div class="chrome-tab" id="tabber">
@@ -34,26 +32,34 @@
         `,
     };
 
+    /**
+     * Listener for background scripts
+     */
+    chrome.runtime.onMessage.addListener(function(req, sender, senderResponse) {
+        if (req === 'toggle-feature-foo') {
+            let chromeTab = document.getElementsByClassName('chrome-tab');
+            chromeTab[0].classList.contains('show')
+                ? chromeTab[0].classList.remove('show')
+                : chromeTab[0].classList.add('show');
+            senderResponse(`${sender.id} Received the command`);
+        }
+    });
     
     const chromeTabModule = {
         
-        allOpenedTabs = [],
+        allOpenedTabs: [],
 
         switchTab: (tabId) => {},
         
         getAllTabs: (callback) => {
             chrome.extension.sendMessage({type: 'getAllTabs'}, function(tabs) {
-                if (!chromeTabModule.allOpenedTabs.length) {
-                    chromeTabModule.allOpenedTabs = tabs;
-                    callback(chromeTabModule.allOpenedTabs);
-                }
-                return false;
+                chromeTabModule.allOpenedTabs = tabs;
+                callback(chromeTabModule.allOpenedTabs);
             });
         },
         
         loadChromeExtension: () => {
             chromeTabModule.getAllTabs(chromeTabModule.constructTabs);
-            // TODO: needs to add event listener here for keyboard shortut to open all opened tabs
         },
 
         constructTabs: (tabs) => {
@@ -85,28 +91,12 @@
                 
                 tabList.appendChild(list);
             });
-
-            chromeTabModule.createTabberShortcutKey();
-        },
-
-        createTabberShortcutKey: () => {
-            const tabberCustomEvent = new CustomEvent("tabberEvent",  {
-                detail: {
-                    message: "Tabber event triggered",
-                    time: new Date(),
-                },
-                bubbles: true,
-                cancelable: true
-            });
-
-            document.getElementById('tabber').dispatchEvent(tabberCustomEvent);
         },
         
         bookmarkTab: (tabId) => {},
 
         shareTab: (mediaName, tabId) => {},
-
     };
 
     chromeTabModule.loadChromeExtension();
-}());
+})();

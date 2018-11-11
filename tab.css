@@ -1,11 +1,10 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
-    font-size: 16px;
 }
 
 .chrome-tab {
+    display: none;
     position: fixed;
     top: 10vw;
     right: 25vw;
@@ -17,9 +16,13 @@
     box-shadow: rgba(102, 96, 91, 0.7) 0px 0px 30px;
 }
 
+.show {
+    display: block;
+}
+
 .search-box {
     width: 100%;
-    font-size: 0.8rem;
+    font-size: 14px;
 }
 
 .fav-icon {
@@ -37,12 +40,13 @@
     margin: 10px 0;
     height: 500px;
     overflow: auto;
+    padding: 0;
 }
 
 li {
     list-style: none;
     margin-top: 10px;
-    font-size: 1rem;
+    font-size: 16px;
 }
 
 li:nth-child(even) {
@@ -55,7 +59,7 @@ li:nth-child(odd) {
 
 li:hover {
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 14px;
     border-left: 4px solid #436b9a;
     padding-left: 15px;
     text-transform: uppercase;
