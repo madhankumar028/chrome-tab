@@ -17,7 +17,6 @@
 
         BASIC_SWITCH_TAB_MARKUP : `
             <div class="chrome-tab" id="tabber">
-                <input type="search" class="search-box">
                 <ul id="tabs" class="tab-list"></ul>
             </div>
         `,
@@ -49,7 +48,22 @@
         
         allOpenedTabs: [],
 
-        switchTab: (tabId) => {},
+        switchTab: (event) => {
+            
+            let selectedTab = {
+                tabId: '',
+                windowId: ''
+            };
+
+            Array.from(event.currentTarget.attributes)
+            .forEach(data => {
+                selectedTab.tabId
+                    ? selectedTab.windowId = data.value
+                    : selectedTab.tabId = data.value;
+            });
+
+            chrome.extension.sendMessage({type: 'switchTab', selectedTab}, function() {});
+        },
         
         getAllTabs: (callback) => {
             chrome.extension.sendMessage({type: 'getAllTabs'}, function(tabs) {
@@ -79,6 +93,10 @@
                 let icon = document.createElement('img');
                 let favIconWrapper = document.createElement('span');
 
+                list.setAttribute('class', 'tab-item');
+                list.setAttribute('data-tab-id', tab.id);
+                list.setAttribute('data-window-id', tab.windowId);
+
                 icon.setAttribute('src', tab.favIconUrl ? tab.favIconUrl : CONFIG.DEFAULT_FAVICON);
                 icon.setAttribute('class', 'fav-icon');
                 title.setAttribute('class', 'tab-title');
@@ -90,13 +108,16 @@
                 list.appendChild(title);
                 
                 tabList.appendChild(list);
+
+                // TODO: adding event listener for all tab-item for switching
+                // list.addEventListener('click', chromeTabModule.switchTab);
             });
         },
-        
+
         bookmarkTab: (tabId) => {},
 
         shareTab: (mediaName, tabId) => {},
     };
-
+    
     chromeTabModule.loadChromeExtension();
 })();

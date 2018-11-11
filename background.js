@@ -17,24 +17,33 @@
      */
     chrome.runtime.onMessage.addListener(function(request, sender, senderResponse) {
         let chromeExtensionMessageHandler = {
+            
             /**
              * returns all the opened tabs in the chrome
              * by excluding the currently opened tab
              */
-            getAllTabs: function(sender) {
+            getAllTabs: function() {
                 chrome.tabs.query({}, tabs => {
                     let filteredTabs = tabs.filter(tab => {
-                        if (tab.id != sender.tab.id) {
+                        if (!tab.active) {
                             return tab;
                         }
                     });
                     senderResponse(filteredTabs);
                 });
                 return true;
-            }
+            },
+
+            switchTab: function (tab) {
+                chrome.tabs.update(tab.tabId, {active: true}, function() {
+                    chrome.windows.update(tab.windowId, {focused: true});
+                });
+
+                return true;
+            },
         }
 
-        return chromeExtensionMessageHandler[request.type](sender);
+        return chromeExtensionMessageHandler[request.type](request.selectedTab);
     });
 
     /**
