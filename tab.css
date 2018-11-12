@@ -43,6 +43,11 @@
     padding: 0;
 }
 
+.tab-list::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
 .tab-item {
     list-style: none;
     margin-top: 10px;

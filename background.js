@@ -38,7 +38,6 @@
                 chrome.tabs.update(tab.tabId, {active: true}, function() {
                     chrome.windows.update(tab.windowId, {focused: true});
                 });
-
                 return true;
             },
         }
@@ -47,7 +46,7 @@
     });
 
     /**
-     * Responder for background scripts
+     * Listener for background scripts
      */
     chrome.commands.onCommand.addListener(function(command) {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
