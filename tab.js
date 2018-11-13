@@ -17,17 +17,9 @@
 
         BASIC_SWITCH_TAB_MARKUP : `
             <div class="chrome-tab" id="tabber">
+                <input class="search-box" type="search" id="chrome-tab-search">
                 <ul id="open-tabs" class="tab-list"></ul>
             </div>
-        `,
-
-        TAB_TEMPLATE  : `
-            <li class="tab-item">
-                <span class="favicon-img">
-                    <img src="{favIcon}">
-                </span>
-                <span class="title">{tabTitle}</span>
-            </li>
         `,
     };
 
@@ -44,6 +36,14 @@
             senderResponse(`${sender.id} Received the command`);
         }
     });
+
+    function filterTabs(event) {
+        let searchBox = document.getElementById('chrome-tab-search');
+        
+        if (searchBox.value.length > 4) {
+            console.log(searchBox.value);
+        }
+    }
     
     const chromeTabModule = {
         
@@ -88,10 +88,13 @@
             tabList = document.getElementById('open-tabs');
             
             tabs.forEach((tab, index) => {
+                let container = document.createElement('div');
                 let list = document.createElement('li');
                 let title = document.createElement('span');
                 let icon = document.createElement('img');
                 let favIconWrapper = document.createElement('span');
+
+                container.setAttribute('class', 'tab-item-container');
 
                 list.setAttribute('class', 'tab-item');
                 list.setAttribute('data-tab-id', tab.id);
@@ -99,22 +102,24 @@
 
                 icon.setAttribute('src', tab.favIconUrl ? tab.favIconUrl : CONFIG.DEFAULT_FAVICON);
                 icon.setAttribute('class', 'fav-icon');
+                
                 title.setAttribute('class', 'tab-title');
-
-                title.innerHTML = tab.title;
+                title.innerHTML = `${tab.title}`;
                 
+                list.appendChild(container);
                 favIconWrapper.appendChild(icon);
-                list.appendChild(favIconWrapper);
-                list.appendChild(title);
-                
+                container.appendChild(favIconWrapper);
+                container.appendChild(title);
+
                 tabList.appendChild(list);
 
                 // TODO: adding event listener for all tab-item for switching
                 list.addEventListener('click', chromeTabModule.switchTab);
             });
-        },
 
-        bookmarkTab: (tabId) => {},
+            let searchBox = document.getElementById('chrome-tab-search');
+            searchBox.addEventListener('keyup', filterTabs);
+        },
 
         shareTab: (mediaName, tabId) => {},
     };
