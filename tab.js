@@ -17,7 +17,7 @@
 
         BASIC_SWITCH_TAB_MARKUP : `
             <div class="chrome-tab" id="tabber">
-                <ul id="tabs" class="tab-list"></ul>
+                <ul id="open-tabs" class="tab-list"></ul>
             </div>
         `,
 
@@ -35,6 +35,7 @@
      * Listener for background scripts
      */
     chrome.runtime.onMessage.addListener(function(req, sender, senderResponse) {
+        console.log('test');
         if (req === 'toggle-feature-foo') {
             let chromeTab = document.getElementsByClassName('chrome-tab');
             chromeTab[0].classList.contains('show')
@@ -50,16 +51,15 @@
 
         switchTab: (event) => {
             
-            let selectedTab = {
-                tabId: '',
-                windowId: ''
-            };
+            let selectedTab = {};
 
             Array.from(event.currentTarget.attributes)
             .forEach(data => {
-                selectedTab.tabId
-                    ? selectedTab.windowId = data.value
-                    : selectedTab.tabId = data.value;
+                if (data.name !== 'class') {
+                    selectedTab['tabId']
+                        ? selectedTab['windowId'] = data.value
+                        : selectedTab['tabId'] = data.value;
+                }
             });
 
             chrome.extension.sendMessage({type: 'switchTab', selectedTab}, function() {});
@@ -85,7 +85,7 @@
             element.innerHTML = CONFIG.BASIC_SWITCH_TAB_MARKUP;
             document.body.appendChild(element);
 
-            tabList = document.getElementById('tabs');
+            tabList = document.getElementById('open-tabs');
             
             tabs.forEach((tab, index) => {
                 let list = document.createElement('li');
@@ -110,7 +110,7 @@
                 tabList.appendChild(list);
 
                 // TODO: adding event listener for all tab-item for switching
-                // list.addEventListener('click', chromeTabModule.switchTab);
+                list.addEventListener('click', chromeTabModule.switchTab);
             });
         },
 

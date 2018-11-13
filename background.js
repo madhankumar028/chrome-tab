@@ -34,9 +34,13 @@
                 return true;
             },
 
+            /**
+             * switch to the selected tab at the particular window
+             * @param {tab} tab 
+             */
             switchTab: function (tab) {
-                chrome.tabs.update(tab.tabId, {active: true}, function() {
-                    chrome.windows.update(tab.windowId, {focused: true});
+                chrome.tabs.update(parseInt(tab.tabId), {active: true}, function() {
+                    chrome.windows.update(parseInt(tab.windowId), {focused: true});
                 });
                 return true;
             },
