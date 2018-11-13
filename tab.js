@@ -27,7 +27,6 @@
      * Listener for background scripts
      */
     chrome.runtime.onMessage.addListener(function(req, sender, senderResponse) {
-        console.log('test');
         if (req === 'toggle-feature-foo') {
             let chromeTab = document.getElementsByClassName('chrome-tab');
             chromeTab[0].classList.contains('show')
@@ -39,9 +38,23 @@
 
     function filterTabs(event) {
         let searchBox = document.getElementById('chrome-tab-search');
+        let matchedTabs = [];
+
+        if (searchBox.value.length) {
+            matchedTabs = chromeTabModule.allOpenedTabs.filter(function(tab, index) {
+                if (
+                    (tab.title.includes(searchBox.value) 
+                    || tab.url.includes(searchBox.value)
+                    )
+                ) {
+                    return tab;
+                }
+            });
+            chromeTabModule.constructTabs(matchedTabs);
+        }
         
-        if (searchBox.value.length > 4) {
-            console.log(searchBox.value);
+        if (!searchBox.value.length) {
+            chromeTabModule.loadChromeExtension();
         }
     }
     
@@ -86,6 +99,10 @@
             document.body.appendChild(element);
 
             tabList = document.getElementById('open-tabs');
+
+            while(tabList.firstChild) {
+                tabList.removeChild(tabList.firstChild);
+            }
             
             tabs.forEach((tab, index) => {
                 let container = document.createElement('div');
