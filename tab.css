@@ -28,6 +28,7 @@
     background: #FFF;
     border: 1px solid #c8ccd0;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .fav-icon {

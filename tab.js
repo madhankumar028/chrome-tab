@@ -28,10 +28,7 @@
      */
     chrome.runtime.onMessage.addListener(function(req, sender, senderResponse) {
         if (req === 'toggle-feature-foo') {
-            let chromeTab = document.getElementsByClassName('chrome-tab');
-            chromeTab[0].classList.contains('show')
-                ? chromeTab[0].classList.remove('show')
-                : chromeTab[0].classList.add('show');
+            hideTabList();
             senderResponse(`${sender.id} Received the command`);
         }
     });
@@ -57,6 +54,17 @@
             chromeTabModule.loadChromeExtension();
         }
     }
+
+    function hideTabList() {
+        let chromeTab = document.getElementsByClassName('chrome-tab');
+            
+            if (chromeTab[0].classList.contains('show')) {
+                chromeTab[0].classList.remove('show');
+            } else {
+                chromeTabModule.getAllTabs(chromeTabModule.constructTabs);
+                chromeTab[0].classList.add('show');
+            }
+    }
     
     const chromeTabModule = {
         
@@ -76,6 +84,7 @@
             });
 
             chrome.extension.sendMessage({type: 'switchTab', selectedTab}, function() {});
+            hideTabList();
         },
         
         getAllTabs: (callback) => {
@@ -86,25 +95,20 @@
         },
         
         loadChromeExtension: () => {
-            chromeTabModule.getAllTabs(chromeTabModule.constructTabs);
+            let element = document.createElement('div');
+            element.innerHTML = CONFIG.BASIC_SWITCH_TAB_MARKUP;
+            document.body.appendChild(element);
         },
 
         constructTabs: (tabs) => {
-            let element = document.createElement('div');
             let tabList;
-
-            chromeTabModule.allOpenedTabs = tabs;
-            
-            element.innerHTML = CONFIG.BASIC_SWITCH_TAB_MARKUP;
-            document.body.appendChild(element);
-
             tabList = document.getElementById('open-tabs');
 
             while(tabList.firstChild) {
                 tabList.removeChild(tabList.firstChild);
             }
             
-            tabs.forEach((tab, index) => {
+            tabs.forEach((tab) => {
                 let container = document.createElement('div');
                 let list = document.createElement('li');
                 let title = document.createElement('span');
