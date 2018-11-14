@@ -4,8 +4,16 @@
   "description": "Used to navigate to any opened tabs in your browser like your favourite editor",
   "version": "1.0",
   "author": "Madhankumar <madhankumar028@gmail.com>",
+  "icons": {
+    "16": "assets/icon_16.png",
+    "48": "assets/icon_48.png",
+    "144": "assets/icon_144.png",
+    "128": "assets/icon_128.png",
+    "280": "assets/icon_280.png"
+  },
   "browser_action": {
-    "default_title": "Tab-switch"
+    "default_title": "Tab-switch",
+    "default_icon": "assets/icon_16.png"
   },
   "content_scripts": [
     {

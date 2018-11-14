@@ -1,6 +1,6 @@
 # chrome-tab-switch
 
-## Chrome Extension - Navigate to any tab in your chrome-browser like your favourite text-editor or IDE.
+## *Chrome Extension - Navigate to any tab in your chrome-browser like your favourite text-editor or IDE.*
 
 ### To load the extension press the below key based on your OS:
 ```
