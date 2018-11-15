@@ -19,16 +19,98 @@
             <input class="search-box" type="search" id="chrome-tab-search">
             <ul id="open-tabs" class="tab-list madhan-tab-list"></ul>
         `,
+
+        STYLES: `
+            .chrome-tab-switch {
+                display: none;
+                position: fixed;
+                top: 10vmin;
+                right: 25vw;
+                z-index: 9999999;
+                background-color: #fff;
+                width: 50vw;
+                border: 1px solid #c7d1d6;
+                padding: 10px;
+                box-shadow: rgba(167, 162, 158, 0.7) 4px 4px 9px 0px;
+            }
+            
+            .show {
+                display: block;
+            }
+            
+            .search-box {
+                font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+                padding: 10px 0;
+                font-size: 14px;
+                color: #3b4045;
+                background: #FFF;
+                border: 1px solid #c8ccd0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .fav-icon {
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                vertical-align: middle;
+            }
+            
+            .tab-title {
+                font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+                margin-left: 10px;
+                font-size: 15px;
+            }
+            
+            .tab-list {
+                margin: 10px 0;
+                height: 400px;
+                overflow: auto;
+                padding: 0;
+            }
+            
+            .tab-list::-webkit-scrollbar {
+                width: 6px;
+                background-color: #F5F5F5;
+            }
+            
+            .tab-item-container {
+                padding: 10px;
+            }
+            
+            .tab-item {
+                height: 60px;
+                padding: 10px 0;
+                list-style: none;
+                margin-top: 10px;
+            }
+            
+            .tab-item:nth-child(even) {
+                background: #ffffff;
+            }
+            
+            .tab-item:nth-child(odd) {
+                background: #f3f4f8;
+            }
+            
+            .tab-item:hover {
+                cursor: pointer;
+                background: rgb(226, 234, 245);
+                border: 1px solid rgb(167, 164, 164);
+                border-style: dotted;
+            }
+        `,
     };
 
     /**
      * Listener for background scripts
      */
     chrome.runtime.onMessage.addListener(function(req, sender, senderResponse) {
-        if (req === 'toggle-feature-foo') {
-            hideTabList();
-            senderResponse(`${sender.id} Received the command`);
-        }
+        // if (req === 'toggle-feature-foo') {
+        //     hideTabList();
+        //     senderResponse(`${sender.id} Received the command`);
+        // }
+        
     });
 
     function filterTabs(event) {
@@ -62,6 +144,24 @@
         searchBox.value = ''; // clearing the input field while hiding the tab-list
     }
 
+
+    function createShadowRoot() {
+        let element = document.createElement('div');
+        
+        let shadow = element.attachShadow({mode: 'open'});
+        // let style = document.createElement('style');
+        
+        element.classList.add('chrome-tab-switch');
+        
+        // element.appendChild(style);
+        document.body.appendChild(element);
+    }
+
+    function render() {
+        console.log('shadow');
+        createShadowRoot();
+    }
+
     const chromeTabModule = {
         
         allOpenedTabs: [],
@@ -91,13 +191,7 @@
         },
         
         loadChromeExtension: () => {
-            let element = document.createElement('div');
-            
-            element.setAttribute('class', 'chrome-tab-switch');
-            element.setAttribute('id', 'tabber');
-            element.innerHTML = CONFIG.BASIC_SWITCH_TAB_MARKUP;
-            
-            document.body.appendChild(element);
+            render();
         },
 
         constructTabs: (tabs) => {
