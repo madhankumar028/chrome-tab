@@ -16,10 +16,8 @@
         DEFAULT_FAVICON: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAMklEQVR4AWMgEkT9R4INWBUgKX0Q1YBXQYQCkhKEMDILogSnAhhEV4AGRqoCTEhkPAMAbO9DU+cdCDkAAAAASUVORK5CYII=',
 
         BASIC_SWITCH_TAB_MARKUP : `
-            <div class="chrome-tab" id="tabber">
-                <input class="search-box" type="search" id="chrome-tab-search">
-                <ul id="open-tabs" class="tab-list"></ul>
-            </div>
+            <input class="search-box" type="search" id="chrome-tab-search">
+            <ul id="open-tabs" class="tab-list madhan-tab-list"></ul>
         `,
     };
 
@@ -49,23 +47,21 @@
             });
             chromeTabModule.constructTabs(matchedTabs);
         }
-        
-        if (!searchBox.value.length) {
-            chromeTabModule.loadChromeExtension();
-        }
     }
 
     function hideTabList() {
-        let chromeTab = document.getElementsByClassName('chrome-tab');
-            
-            if (chromeTab[0].classList.contains('show')) {
-                chromeTab[0].classList.remove('show');
-            } else {
-                chromeTabModule.getAllTabs(chromeTabModule.constructTabs);
-                chromeTab[0].classList.add('show');
-            }
+        let chromeTab = document.getElementsByClassName('chrome-tab-switch');
+        let searchBox = document.getElementById('chrome-tab-search');
+        if (chromeTab[0].classList.contains('show')) {
+            chromeTab[0].classList.remove('show');
+        } else {
+            chromeTabModule.getAllTabs(chromeTabModule.constructTabs);
+            chromeTab[0].classList.add('show');
+            searchBox.focus();
+        }
+        searchBox.value = ''; // clearing the input field while hiding the tab-list
     }
-    
+
     const chromeTabModule = {
         
         allOpenedTabs: [],
@@ -96,13 +92,16 @@
         
         loadChromeExtension: () => {
             let element = document.createElement('div');
+            
+            element.setAttribute('class', 'chrome-tab-switch');
+            element.setAttribute('id', 'tabber');
             element.innerHTML = CONFIG.BASIC_SWITCH_TAB_MARKUP;
+            
             document.body.appendChild(element);
         },
 
         constructTabs: (tabs) => {
-            let tabList;
-            tabList = document.getElementById('open-tabs');
+            let tabList = document.getElementById('open-tabs');
 
             while(tabList.firstChild) {
                 tabList.removeChild(tabList.firstChild);
