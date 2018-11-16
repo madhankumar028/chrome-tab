@@ -24,12 +24,6 @@
              */
             getAllTabs: function() {
                 chrome.tabs.query({}, tabs => {
-                    //TODO: filter the active window's active tab
-                    // let filteredTabs = tabs.filter(tab => {
-                    //     if (!tab.active) {
-                    //         return tab;
-                    //     }
-                    // });
                     senderResponse(tabs);
                 });
                 return true;
@@ -60,5 +54,4 @@
             });
         })
     });
-
 })();

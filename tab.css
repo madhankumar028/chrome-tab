@@ -1,9 +1,4 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-}
-
-:host .chrome-tab-switch {
+.chrome-tab-switch {
     display: none;
     position: fixed;
     top: 10vmin;
@@ -16,68 +11,6 @@
     box-shadow: rgba(167, 162, 158, 0.7) 4px 4px 9px 0px;
 }
 
-:host .show {
+.show {
     display: block;
-}
-
-.chrome-tab-switch::shadow .search-box {
-    font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
-    padding: 10px 0;
-    font-size: 14px;
-    color: #3b4045;
-    background: #FFF;
-    border: 1px solid #c8ccd0;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.chrome-tab-switch::shadow .fav-icon {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    vertical-align: middle;
-}
-
-.chrome-tab-switch::shadow .tab-title {
-    font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
-    margin-left: 10px;
-    font-size: 15px;
-}
-
-.chrome-tab-switch::shadow .tab-list {
-    margin: 10px 0;
-    height: 400px;
-    overflow: auto;
-    padding: 0;
-}
-
-.chrome-tab-switch::shadow .tab-list::-webkit-scrollbar {
-    width: 6px;
-    background-color: #F5F5F5;
-}
-
-.chrome-tab-switch::shadow .tab-item-container {
-    padding: 10px;
-}
-
-.chrome-tab-switch::shadow .tab-item {
-    height: 60px;
-    padding: 10px 0;
-    list-style: none;
-    margin-top: 10px;
-}
-
-.chrome-tab-switch::shadow .tab-item:nth-child(even) {
-    background: #ffffff;
-}
-
-.chrome-tab-switch::shadow .tab-item:nth-child(odd) {
-    background: #f3f4f8;
-}
-
-.chrome-tab-switch::shadow .tab-item:hover {
-    cursor: pointer;
-    background: rgb(226, 234, 245);
-    border: 1px solid rgb(167, 164, 164);
-    border-style: dotted;
 }
