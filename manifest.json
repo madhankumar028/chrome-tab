@@ -18,8 +18,7 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["tab.js"],
-      "css": ["tab.css"]
+      "js": ["tab.js"]
     }
   ],
   "permissions": ["tabs", "http://*/*", "https://*/*","activeTab"],
