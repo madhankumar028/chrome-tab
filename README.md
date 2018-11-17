@@ -14,6 +14,10 @@
 
 Follow this [link](https://developer.chrome.com/extensions/getstarted) to understand how to pack the extension in development mode.
 
+### Roadmap
+* Layout change: converting the list layout to card layout for better user experience.
+* Share: sharing the url in social media like Twitter as Today I Learnt.
+
 ### Contributions
 Contributions are welcome. If you are interested to improve the app, give me a PR.
 
