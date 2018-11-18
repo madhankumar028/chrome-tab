@@ -15,6 +15,7 @@
 Follow this [link](https://developer.chrome.com/extensions/getstarted) to understand how to pack the extension in development mode.
 
 ### Roadmap
+* Adding a extension installed and updated listener to show a chrome push notification.
 * Layout change: converting the list layout to card layout for better user experience.
 * Share: sharing the url in social media like Twitter as Today I Learnt.
 
