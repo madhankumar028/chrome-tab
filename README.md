@@ -1,6 +1,6 @@
-# chrome-tab-switch
+# chrome-tab-switch [![codebeat badge](https://codebeat.co/badges/ef34b705-cd7d-4474-8cd2-a4a0c28d6ee9)](https://codebeat.co/projects/github-com-madhankumar028-chrome-tab-master)
 
-## *Chrome Extension - Navigate to any tab in your chrome-browser like your favourite text-editor or IDE.*
+### *Chrome Extension - Navigate to any tab in your chrome-browser like your favourite text-editor or IDE.*
 
 ### To load the extension press the below key based on your OS:
 ```
