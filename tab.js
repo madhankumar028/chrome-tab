@@ -13,7 +13,7 @@
     const element       = document.createElement('div');
     const shadow        = element.attachShadow({mode: 'open'}); // shadowdom
     const inputElement  = document.createElement('input');
-    const tabList       = document.createElement('ul');
+    const tabList       = document.createElement('div');
 
     // all the app level constants are configured inside the configure object
     const CONFIG = {
@@ -22,7 +22,7 @@
 
         BASIC_SWITCH_TAB_MARKUP : `
             <input class="search-box" type="search" id="chrome-tab-search">
-            <ul id="open-tabs" class="tab-list madhan-tab-list"></ul>
+            <div id="open-tabs" class="container madhan-tab-list"></div>
         `,
 
         style: `
@@ -38,54 +38,44 @@
                 box-sizing: border-box;
             }
             
-            .fav-icon {
-                height: 20px;
-                width: 20px;
-                border-radius: 50%;
-                vertical-align: middle;
-            }
-            
-            .tab-title {
-                font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
-                margin-left: 10px;
-                font-size: 15px;
-            }
-            
-            .tab-list {
-                margin: 10px 0;
-                height: 400px;
+            .container {
+                display: flex;
+                -webkit-flex-flow: row wrap;
+                max-height: 70vh;
                 overflow: auto;
-                padding: 0;
-            }
-            
-            .tab-list::-webkit-scrollbar {
-                width: 6px;
-                background-color: #F5F5F5;
-            }
-            
-            .tab-item-container {
-                padding: 8px;
-            }
-            
-            .tab-item {
-                height: 40px;
-                padding: 10px 0;
-                list-style: none;
-                margin-bottom: 10px;
-            }
-            
-            .tab-item:nth-child(even) {
-                background: #ffffff;
-            }
-            
-            .tab-item:nth-child(odd) {
-                background: #f3f4f8;
-            }
-            
-            .tab-item:hover {
-                cursor: pointer;
-                background: rgb(226, 234, 245);
-            }
+              }
+              .tab-list {
+                margin: 0px;
+                padding: 10px;
+              }
+              .tab-list:hover {
+                cursor:pointer;
+                background: #9e999921;
+              }
+              .img-container {
+                background:#f7f7f7;
+                margin: 0 auto;
+                height:50px;
+                width:50px;
+                border-radius: 50%;
+              }
+              .img-container img {
+                  width: 20px;
+                  height: 20px;
+                  display: block;
+                  margin: 0 auto;
+                  position: relative;
+                  top: 25%;
+              }
+              .tab-name {
+                  font-size: 16px;
+                  width: 200px;
+                  overflow: hidden;
+                  text-align: center;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  margin-top: 20px;
+              }
 
             .empty-state {
                 height: 100px;
@@ -146,7 +136,7 @@
         inputElement.addEventListener('keyup', filterTabs);
 
         tabList.setAttribute('id', 'open-tabs');
-        tabList.setAttribute('class', 'tab-list');
+        tabList.setAttribute('class', 'container');
 
         shadow.appendChild(inputElement);
         shadow.appendChild(tabList);
@@ -228,28 +218,24 @@
             }
             if (tabs.length) {
                 tabs.forEach((tab) => {
-                    let container = document.createElement('div');
-                    let list = document.createElement('li');
-                    let title = document.createElement('span');
-                    let icon = document.createElement('img');
-                    let favIconWrapper = document.createElement('span');
+                    let list        = document.createElement('div');
+                    let figure      = document.createElement('figure');
+                    let icon        = document.createElement('img');
+                    let tabName     = document.createElement('p');
     
-                    container.setAttribute('class', 'tab-item-container');
-    
-                    list.setAttribute('class', 'tab-item');
+                    list.setAttribute('class', 'tab-list');
                     list.setAttribute('data-tab-id', tab.id);
                     list.setAttribute('data-window-id', tab.windowId);
     
                     icon.setAttribute('src', tab.favIconUrl ? tab.favIconUrl : CONFIG.DEFAULT_FAVICON);
-                    icon.setAttribute('class', 'fav-icon');
                     
-                    title.setAttribute('class', 'tab-title');
-                    title.innerHTML = `${tab.title}`;
+                    tabName.setAttribute('class', 'tab-name');
+                    figure.setAttribute('class', 'img-container');
+                    tabName.innerHTML = `${tab.title}`;
                     
-                    list.appendChild(container);
-                    favIconWrapper.appendChild(icon);
-                    container.appendChild(favIconWrapper);
-                    container.appendChild(title);
+                    list.appendChild(figure);
+                    figure.appendChild(icon);
+                    list.appendChild(tabName);
     
                     tabList.appendChild(list);
     
