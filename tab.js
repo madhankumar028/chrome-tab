@@ -39,8 +39,10 @@
             }
             
             .container {
-                display: flex;
+                display: -webkit-flex;
                 -webkit-flex-flow: row wrap;
+                display: flex;
+                flex-flow: row wrap;
                 max-height: 70vh;
                 overflow: auto;
               }
