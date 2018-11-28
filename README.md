@@ -2,6 +2,8 @@
 
 ### *Chrome Extension - Navigate to any tab in your chrome-browser like your favourite text-editor or IDE.*
 
+Download the extension from [chrome web store](https://chrome.google.com/webstore/detail/tab-switcher/akenkgmojelifdnoogjnjfegmegandil?hl=en-US&gl=IN)
+
 ### To load the extension press the below key based on your OS:
 ```
     windows: ctrl+shift+y
