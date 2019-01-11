@@ -1,6 +1,8 @@
-# chrome-tab-switch [![codebeat badge](https://codebeat.co/badges/ef34b705-cd7d-4474-8cd2-a4a0c28d6ee9)](https://codebeat.co/projects/github-com-madhankumar028-chrome-tab-master)
+# Tab-switcher
 
-### *Chrome Extension - Navigate to any tab in your chrome-browser like your favourite text-editor or IDE.*
+[![codebeat badge](https://codebeat.co/badges/ef34b705-cd7d-4474-8cd2-a4a0c28d6ee9)](https://codebeat.co/projects/github-com-madhankumar028-chrome-tab-master)
+
+Chrome Extension - Navigate to any tab in your chrome-browser like your favourite text-editor or IDE without any pain.
 
 Download the extension from [chrome web store](https://chrome.google.com/webstore/detail/tab-switcher/akenkgmojelifdnoogjnjfegmegandil?hl=en-US&gl=IN)
 
@@ -22,8 +24,8 @@ Follow this [link](https://developer.chrome.com/extensions/getstarted) to unders
 * Share: sharing the url in social media like Twitter as Today I Learnt.
 
 ### Contributions
-Contributions are welcome. If you are interested to improve the app, give me a PR.
+Feel free to submit an issue, create a pull request or spread the word.
+You can also share your feedback and suggestions to improve the app.
+Show your interest by clicking ⭐️.
 
-You can also share your feedback and suggestions to improve the app. Shoot me @ ✉️ madhankumar028@gmail.com.
-
-Show your interest by clicking ⭐️
+Shoot me @ ✉️ madhankumar028@gmail.com.
