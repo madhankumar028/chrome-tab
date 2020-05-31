@@ -1,23 +1,23 @@
 .chrome-tab-switch {
-    /* positioning */
-    position: fixed;
-    left: 50%;
-    top: 10vmin;
-    transform: translateX(-50%);
-    z-index: 9999999;
-    
-    /* box model */
-    display: none;
-    width: 50vw;
-    max-height: calc(50vw * (9/16));
-    border: 1px solid #c8ccd0;
-
-    /* colors */
-    background-color: #fff;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+  display: none;
+	position: fixed;
+  left: 50%;
+  top: 10vmin;
+  transform: translateX(-50%);
+  z-index: 9999999;
+  width: 50vw;
+  max-height: calc(50vw * (9 / 16));
+  border: 1px solid #c8ccd0;
+  background: #24273b;
+	color: #9c9cab;
+	max-height: 70vh;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border-color: transparent;
+  padding: 16px;
 }
 
 .show {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
